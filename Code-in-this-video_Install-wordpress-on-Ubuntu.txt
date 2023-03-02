@@ -1,0 +1,41 @@
+
+
+###
+# Website: https://totatca.com
+###
+
+	sudo apt install -y vim unzip wget php php-common php-mysql php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-dev php-imap php-mbstring php-opcache php-soap php-zip php-intl
+	
+	CREATE DATABASE wp_db;
+
+	CREATE USER wp_user@localhost IDENTIFIED BY 'wp_PWD';
+	
+	GRANT ALL ON wp_db.* TO wp_user@localhost;
+	
+	FLUSH PRIVILEGES;
+
+	sudo wget https://wordpress.org/latest.zip
+	
+	
+### NOTE
+##### Replace totatca.local = your-domain
+##### totatca.local = your-name
+
+<VirtualHost *:80>
+	ServerAdmin your-email@totatca.local
+
+	DocumentRoot /var/www/html/totatca.local
+	ServerName totatca.local
+	ServerAlias www.totatca.local
+
+	<Directory /var/www/html/mysite/>
+		Options FollowSymLinks
+		AllowOverride All
+		Require all granted
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
